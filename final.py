@@ -1,36 +1,43 @@
 # Имена
-name = input('напишите имя пользователя: ')
-title = input('напишите заголовок: ')
-status = input('напишите статус: ')
-date_day = input("дата создания заметки""\nдень: ")
-date_month = input("месяц: ")
-date_year = input("год: ")
-issue_date_day = input('дата истечения заметки:''\nдень: ')
-issue_date_month = input("месяц: ")
-issue_date_year = input("год: ")
-# списки
-date_create = [date_day,[date_year],[date_month]]
-issue_date = [issue_date_day,[issue_date_month],[issue_date_year]]
-# показывать ли год
-print("Показывать год? (да/нет)")
-answer = input()
+list_ = {}
+list_["name"] = input('напишите имя пользователя: ')
+list_["date"] = input('дата создания заметок (день, месяц, год): ').split()
+list_["issue_date"] = input('дата истечения заметок (день, месяц, год): ').split()
 # заголовки заметок
-title1 = input("заголовок 1 заметки: ")
-title2 = input("заголовок 2 заметки: ")
-title3 = input("заголовок 3 заметки: ")
-titles = [title1,title2,title3]
+list_["titles"] = []
+for i in range (4):
+    title = input(f"\nВведите заголовок заметки {i + 1}: ")
+    list_["titles"].append(title)
 # описание заметок
-content1 = input('напишшите описание 1 заметки: ')
-content2 = input('напишшите описание 2 заметки: ')
-content3 = input('напишшите описание 3 заметки: ')
-contents = [content1,content2,content3]
-# вывод значений
-print("\n\nBы ввели следующие данные")
-print("Имя:", name)
-print("Заголовоки:",titles)
-print("Описания:",contents)
-print("Статус:",status)
-if answer == "да" or "Да": print("дата создания: ",date_day, date_month, date_year)
-elif answer == "нет" or "Нет": print("дата создания: ",date_day, date_month)
-if answer == "да" or "Да": print("дата создания: ",issue_date_day,issue_date_month,issue_date_year)
-elif answer == "нет" or "Нет": print("дата создания: ",issue_date_day,issue_date_month)
+list_["contents"] = []
+for k in range(4):
+    content = input(f"\nВведите описание заметки {k + 1}: ")
+    list_["contents"].append(content)
+# статусы заметок
+list_["statuses"] = []
+for j in range(4):
+    status = input(f"\nВведите статус заметки (активно\не активно) №{j + 1}: ")
+    list_["statuses"].append(status)
+# вывод данных
+print("\nBы ввели следующие данные")
+print(*list_["name"])
+print("Заголовок 1 заметки", *list_["titles"][:1], "\nОписание 1 заметки", *list_["contents"][:1],
+      "Статус 1 заметки", *list_["statuses"][:1])
+print("\nЗаголовок 2 заметки", *list_["titles"][1:2], "\nОписание 2 заметки", *list_["contents"][1:2],
+      "Статус 2 заметки", *list_["statuses"][1:2])
+print("\nЗаголовок 3 заметки", *list_["titles"][2:3], "\nОписание 3 заметки", *list_["contents"][2:3],
+      "Статус 3 заметки", *list_["statuses"][2:3])
+print("\nЗаголовок 4 заметки", *list_["titles"][3:4], "\nОписание 4 заметки", *list_["contents"][3:4],
+      "Статус 4 заметки", *list_["statuses"][3:4])
+# показывать год или нет
+while True:
+    answer = input("Показывать год? (да/нет): ")
+    if answer in ["Нет", "нет"]:
+        print("\nВремя создания заметок", *list_["date"][0:2], "\nВремя истечения заметок", *list_["issue_date"][0:2])
+        break
+    if answer in ["Да", "да"]:
+        print("\nВремя создания заметок", *list_["date"], "\nВремя истечения заметок", *list_["issue_date"])
+        break
+    else:
+        print("не верный ответ попробуйте еще раз")
+        continue
